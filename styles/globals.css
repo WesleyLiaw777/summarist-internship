@@ -4,6 +4,39 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+.auth__separator {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+}
+
+.hover__duration{
+  transition: background-color 200ms linear;
+}
+
+.auth__separator::after,
+.auth__separator::before {
+  content: "";
+  display: block;
+  width: 140px;
+  height: 1px;
+  background: #bac8ce;
+}
+
+.auth__input {
+  height: 40px;
+  border: 2px solid #bac8ce;
+  border-radius: 4px;
+  color: #394547;
+  padding: 0 12px;
+  width: 100%;
+  outline: none;
+}
+
+.auth__input:focus {
+  border-color: #20ba68;
+}
+
 * {
   margin: 0;
   padding: 0;
