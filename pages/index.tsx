@@ -1,25 +1,15 @@
 import Image from "next/image";
-import { useState } from "react"
-import { Inter } from "next/font/google";
 import { AiFillFileText, AiFillBulb, AiFillAudio } from "react-icons/ai";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
-import { authStateAtom as auth } from "@/atoms/authStateAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import LoginModal from "../components/modals/LoginModal";
-import { loginModalState } from "@/atoms/loginModalState";
-const inter = Inter({ subsets: ["latin"] });
-
+import { useRecoilState } from "recoil";
+import { authModalOpenAtom } from "@/atoms/authModalAtom";
 export default function Home() {
-  const [isOpen, setIsOpen] = useRecoilState(loginModalState);
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  const [showAuthModal, setShowAuthModal] = useRecoilState(authModalOpenAtom);
   const handleOpen = () => {
-    setIsOpen(true);
-  };
-
+    setShowAuthModal(true);
+  }
   return (
     <>
       <nav className="nav">
@@ -28,9 +18,7 @@ export default function Home() {
             <Image src="/logo.png" width={200} height={200} alt="logo" />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">
-              <LoginModal />
-            </li>
+            <li className="nav__list nav__list--login" onClick={handleOpen}>Login</li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
@@ -54,7 +42,9 @@ export default function Home() {
                   <br className="remove--tablet" />
                   and even people who don’t like to read.
                 </div>
-                <button className="btn home__cta--btn" onClick={handleOpen}>Login</button>
+                <button className="btn home__cta--btn" onClick={handleOpen}>
+                  Login
+                </button>
               </div>
               <figure className="landing__image--mask">
                 <Image
@@ -246,7 +236,9 @@ export default function Home() {
               </div>
             </div>
             <div className="reviews__btn--wrapper">
-              <button className="btn home__cta--btn" onClick={handleOpen}>Login</button>
+              <button className="btn home__cta--btn" onClick={handleOpen}>
+                Login
+              </button>
             </div>
           </div>
         </div>
