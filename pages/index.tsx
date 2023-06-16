@@ -22,7 +22,6 @@ export default function Home() {
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
-            <li className="nav__list nav__list--mobile">Logout</li>
           </ul>
         </div>
       </nav>
@@ -187,7 +186,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  This app has been a <b>game-changer</b> for me! It's saved me
+                  This app has been a <b>game changer</b> for me! It's saved me
                   so much time and effort in reading and comprehending books.
                   Highly recommend it to all book lovers.
                 </div>
@@ -200,7 +199,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  I love this app! It provides
+                  I love this app! It provides&nbsp;
                   <b>concise and accurate summaries</b> of books in a way that
                   is easy to understand. It's also very user-friendly and
                   intuitive.
@@ -247,7 +246,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="section__title">
-              Start growing with Summarist now
+              Start growing with Summarist now!
             </div>
             <div className="numbers__wrapper">
               <div className="numbers">

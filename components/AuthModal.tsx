@@ -11,7 +11,6 @@ import { FcGoogle } from "react-icons/fc";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from "next/router";
@@ -27,44 +26,47 @@ export default function AuthModal() {
   const handleClose = () => {
     setAuthModalOpen(false);
     setActiveSection("login");
+    errorMsg && setErrorMsg("");
   };
 
   /* FIREBASE */
   //email useState can be reused b/w login & pw reset w/ no issues.
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const router = useRouter();
-  const handleGuestSignin = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        "guest@guestmail.com",
-        "123456",
-      );
-      // User signed in successfully
-      const user = userCredential.user;
-      console.log("Signed in user:", user);
-    } catch (error) {
-      console.error("Sign-in error:", error);
-    }
-  };
-  const handleSignup = async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log("Welcome, ", userCredential.user);
-      handleClose();
-      router.push("/for-you");
-    } catch (error) {
-      console.error("Error creating account:", error);
-    }
-    signOut(auth);
-    console.log(`ran`)
 
+  //One auth function to handle them all (guest login, login, signup)
+  const handleAuth = async (authOption: string) => {
+    try {
+      let userCredential;
+      if (authOption === "guest") {
+        userCredential = await signInWithEmailAndPassword(
+          auth,
+          "guest@guestmail.com",
+          "123456"
+        );
+      } else if (authOption === "signin") {
+        userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      } else if (authOption === "signup") {
+        userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+      }
+      router.push("/for-you");
+      handleClose();
+    } catch (error: any) {
+      console.error(error.message);
+      setErrorMsg(error.message);
+    }
   };
+
   return (
     <Modal
       open={authModalOpen}
@@ -83,7 +85,7 @@ export default function AuthModal() {
                 Log in to Summarist
               </h3>
               <button
-                onClick={handleGuestSignin}
+                onClick={() => handleAuth("guest")}
                 className="hover__duration relative h-10 w-full rounded-md bg-[#3a579d] text-[16px] text-white hover:bg-[#25396b]"
               >
                 <BsFillPersonFill className="absolute bottom-1 left-1 h-8 w-8" />
@@ -100,6 +102,7 @@ export default function AuthModal() {
                 <span className="color-[#394547] mx-6 text-sm">or</span>
               </div>
               <div className="flex w-full flex-col items-center gap-4 text-sm">
+                {errorMsg && <span className="text-red-600">{errorMsg}</span>}
                 <input
                   type="email"
                   placeholder="Email Address"
@@ -113,7 +116,7 @@ export default function AuthModal() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
-                  type="submit"
+                  onClick={() => handleAuth("signin")}
                   className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]"
                 >
                   Login
@@ -152,6 +155,7 @@ export default function AuthModal() {
                 <span className="color-[#394547] mx-6 text-sm">or</span>
               </div>
               <div className="flex w-full flex-col items-center gap-4 text-sm">
+                {errorMsg && <span className="text-red-600">{errorMsg}</span>}
                 <input
                   type="email"
                   placeholder="Email Address"
@@ -165,8 +169,9 @@ export default function AuthModal() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <button
-                onClick={handleSignup}
-                className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
+                  onClick={() => handleAuth("signup")}
+                  className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]"
+                >
                   Signup
                 </button>
               </div>

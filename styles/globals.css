@@ -4,6 +4,30 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
+.sidebar__link{
+  display: flex;
+  align-items: center;
+  height: 56px;
+  color: #032b41;
+  margin-bottom: 8px;
+  cursor: pointer;
+  padding: 12px;
+  padding-left: 24px;
+  transition: all 100ms ease;
+}
+.sidebar__link:hover{
+  background-color: #f0efef;
+}
+
+.sidebar__icon{
+  margin-right: 12px;
+  font-size: 24px;
+}
+
+.sidebar__link--text{
+  font-size: 16px;
+}
+
 .auth__separator {
   display: flex;
   align-items: center;
