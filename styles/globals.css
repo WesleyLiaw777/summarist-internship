@@ -4,27 +4,51 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
-.sidebar__link{
+.selected__book {
+  display: flex;
+  justify-content: space-between;
+  width: calc((100% / 3) * 2);
+  background-color: #fbefd6;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 24px;
+  gap: 24px;
+}
+
+.foryou__section--title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #032b41;
+  margin-bottom: 16px;
+}
+
+.foryou__section--subtitle {
+  font-weight: 300;
+  color: #394547;
+  margin-bottom: 16px;
+}
+
+.sidebar__link {
   display: flex;
   align-items: center;
   height: 56px;
   color: #032b41;
   margin-bottom: 8px;
-  cursor: pointer;
   padding: 12px;
   padding-left: 24px;
   transition: all 100ms ease;
 }
-.sidebar__link:hover{
+
+.sidebar__link:hover {
   background-color: #f0efef;
 }
 
-.sidebar__icon{
+.sidebar__icon {
   margin-right: 12px;
   font-size: 24px;
 }
 
-.sidebar__link--text{
+.sidebar__link--text {
   font-size: 16px;
 }
 
@@ -34,7 +58,7 @@
   margin: 16px 0;
 }
 
-.hover__duration{
+.hover__duration {
   transition: background-color 200ms linear;
 }
 
