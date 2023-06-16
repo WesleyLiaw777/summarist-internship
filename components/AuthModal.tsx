@@ -1,13 +1,23 @@
+import { useState } from "react";
+
 import { Modal } from "@mui/material";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { authModalOpenAtom } from "@/atoms/authModalAtom";
 
 import { RxCross1 as XIcon } from "react-icons/rx";
 import { BsFillPersonFill } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { authModalOpenAtom } from "@/atoms/authModalAtom";
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth } from "@/firebase";
+import { useRouter } from "next/router";
 
 export default function AuthModal() {
+  /* MODAL */
   const [authModalOpen, setAuthModalOpen] = useRecoilState(authModalOpenAtom);
   //used one state to handle switching b/w login/password/signup content
   const [activeSection, setActiveSection] = useState<string>("login");
@@ -19,6 +29,42 @@ export default function AuthModal() {
     setActiveSection("login");
   };
 
+  /* FIREBASE */
+  //email useState can be reused b/w login & pw reset w/ no issues.
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const handleGuestSignin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        "guest@guestmail.com",
+        "123456",
+      );
+      // User signed in successfully
+      const user = userCredential.user;
+      console.log("Signed in user:", user);
+    } catch (error) {
+      console.error("Sign-in error:", error);
+    }
+  };
+  const handleSignup = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("Welcome, ", userCredential.user);
+      handleClose();
+      router.push("/for-you");
+    } catch (error) {
+      console.error("Error creating account:", error);
+    }
+    signOut(auth);
+    console.log(`ran`)
+
+  };
   return (
     <Modal
       open={authModalOpen}
@@ -36,7 +82,10 @@ export default function AuthModal() {
               <h3 className="mb-6 text-xl font-bold text-[#032b41]">
                 Log in to Summarist
               </h3>
-              <button className="hover__duration relative h-10 w-full rounded-md bg-[#3a579d] text-[16px] text-white hover:bg-[#25396b]">
+              <button
+                onClick={handleGuestSignin}
+                className="hover__duration relative h-10 w-full rounded-md bg-[#3a579d] text-[16px] text-white hover:bg-[#25396b]"
+              >
                 <BsFillPersonFill className="absolute bottom-1 left-1 h-8 w-8" />
                 Login as Guest
               </button>
@@ -55,17 +104,19 @@ export default function AuthModal() {
                   type="email"
                   placeholder="Email Address"
                   className="auth__input"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   type="password"
                   placeholder="Password"
                   className="auth__input"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
+                <button
+                  type="submit"
+                  className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]"
+                >
                   Login
-                </button>
-                <button className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
-                  Signup
                 </button>
               </div>
             </div>
@@ -105,13 +156,17 @@ export default function AuthModal() {
                   type="email"
                   placeholder="Email Address"
                   className="auth__input"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   type="password"
                   placeholder="Password"
                   className="auth__input"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
+                <button
+                onClick={handleSignup}
+                className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
                   Signup
                 </button>
               </div>
@@ -140,6 +195,7 @@ export default function AuthModal() {
                   type="email"
                   placeholder="Email Address"
                   className="auth__input"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <button className="hover__duration h-10 w-full bg-[#2bd97c] hover:bg-[#20ba68]">
                   Send reset password link
