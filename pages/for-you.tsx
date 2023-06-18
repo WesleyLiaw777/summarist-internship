@@ -74,7 +74,6 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
             alt="logo"
             className="p-5"
           />
-
           <div className="mb-5 mt-10 flex flex-grow flex-col justify-between">
             {/* PAGE LINKS */}
             <ul>
@@ -121,75 +120,63 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex h-screen flex-1 flex-col items-center md:ml-[200px] 2xl:ml-0 ">
-          {/* TOP SECTION */}
-          <div className="flex h-[80px] w-full max-w-[1070px] justify-end">
-            <div className="flex flex:1 margin-auto flex-col justify-center">
-              {/* SEARCH BAR */}
-              <div className="relative m-8 flex w-full max-w-[340px] bg-[#f1f6f4]">
-                <input
-                  className="h-[40px] w-full rounded-md border-2 bg-[#f1f6f4] p-3 text-sm text-[#042330] placeholder-gray-500 outline-none"
-                  type="text"
-                  placeholder="Search for books..."
-                />
-                <div className="absolute right-[4px] flex h-[40px] items-center border-l-2 border-[#e1e7ea]">
-                  <div className="pl-2 pr-1">
-                    <AiOutlineSearch className="text-2xl" />
-                  </div>
+        <div className="flex flex-1 justify-center px-8 md:ml-[200px] 2xl:ml-0">
+          {/* RIGHT PAGE */}
+          <div className="flex w-full max-w-[1070px] flex-col items-center">
+            {/* TOP */}
+            <div className="relative flex h-[80px] w-full items-center justify-end">
+              <input
+                className="mx-4 h-[40px] w-full max-w-[340px] rounded-md border-2 bg-[#f1f6f4] p-3 text-sm text-[#042330] placeholder-gray-500 outline-none"
+                type="text"
+                placeholder="Search for books..."
+              />
+              <div className="absolute right-[24px] flex h-[40px] items-center border-l-2 border-[#e1e7ea]">
+                <div className="pl-2 pr-1">
+                  <AiOutlineSearch className="text-2xl" />
                 </div>
               </div>
             </div>
-          </div>
-
-          <hr className="w-screen" />
-
-          {/* CONTENT SECTION */}
-          <div className="mt-10 flex flex-col gap-y-3 p-6 pb-[80px] max-w-[1070px]">
-            {/* SELECTED BOOK */}
-            <section className="mx-4 w-full flex flex-col">
-              <h3 className="foryou__section--title">Selected just for you</h3>
-              <Link
-                href={"/book"}
-                className="mb-6 flex w-full max-w-[680px] flex-col justify-between gap-6 rounded bg-[#fbefd6] p-6 text-[#032b41] md:flex-row md:px-10 md:py-6"
-              >
-                <div className="w-full text-left md:w-[30%]">
-                  {selected?.subTitle}
-                </div>
-                <div className="hidden h-[140px] w-[1px] bg-[#bac8ce] md:flex"></div>
-                <div className="flex">
-                  <Image
-                    src={`${selected.imageLink}`}
-                    width={140}
-                    height={140}
-                    alt="selected book image"
-                    className="mr-4"
-                  />
-                  <div className="flex flex-col gap-y-1 text-left">
-                    <h3 className="font-semibold">{selected?.title}</h3>
-                    <h4>{selected?.author}</h4>
-                    <div>3 mins 23 secs</div>
+            {/* CONTENT SECTION */}
+            <div className="mt-10 flex max-w-[1070px] flex-col gap-y-3 pb-[80px]">
+              {/* SELECTED BOOK */}
+              <section>
+                <h3 className="foryou__section--title">
+                  Selected just for you
+                </h3>
+                <Link
+                  href={"/book"}
+                  className="mb-6 flex w-full max-w-[680px] flex-col justify-between gap-6 rounded bg-[#fbefd6] p-6 text-[#032b41] md:flex-row md:px-10 md:py-6"
+                >
+                  <div className="w-full text-left md:w-[30%]">
+                    {selected?.subTitle}
                   </div>
-                </div>
-              </Link>
-            </section>
+                  <div className="hidden h-[140px] w-[1px] bg-[#bac8ce] md:flex"></div>
+                  <div className="flex">
+                    <Image
+                      src={`${selected.imageLink}`}
+                      width={140}
+                      height={140}
+                      alt="selected book image"
+                      className="mr-4"
+                    />
+                    <div className="flex flex-col gap-y-1 text-left">
+                      <h3 className="font-semibold">{selected?.title}</h3>
+                      <h4>{selected?.author}</h4>
+                      <div>3 mins 23 secs</div>
+                    </div>
+                  </div>
+                </Link>
+              </section>
 
-            {/* RECOMMENDED */}
-            <section>
-              <h3 className="foryou__section--title">Recommended for you</h3>
-              <span className="foryou__section--subtitle">
-                We think you'll like these
-              </span>
-              <BookSlider books={recommended} />
-            </section>
-
-            {/* SUGGESTED */}
-            <section>
-              <h3 className="foryou__section--title">Suggested books</h3>
-              <span className="foryou__section--subtitle">
-                Check out what others have been reading
-              </span>
-              <BookSlider books={suggested} />
-            </section>
+              {/* RECOMMENDED */}
+              <section>
+                <h3 className="foryou__section--title">Recommended for you</h3>
+                <span className="foryou__section--subtitle">
+                  We think you'll like these
+                </span>
+                <BookSlider books={recommended} />
+              </section>
+            </div>
           </div>
         </div>
       </div>
