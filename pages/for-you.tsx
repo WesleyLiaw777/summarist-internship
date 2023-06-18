@@ -172,7 +172,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
               <section>
                 <h3 className="foryou__section--title">Recommended for you</h3>
                 <span className="foryou__section--subtitle">
-                  We think you'll like these
+                  We think you&apos;ll like these
                 </span>
                 <BookSlider books={recommended} />
               </section>
