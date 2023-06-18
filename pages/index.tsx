@@ -186,7 +186,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  This app has been a <b>game changer</b> for me! It's saved me
+                  This app has been a <b>game changer</b> for me! It&apos;s saved me
                   so much time and effort in reading and comprehending books.
                   Highly recommend it to all book lovers.
                 </div>
@@ -201,7 +201,7 @@ export default function Home() {
                 <div className="review__body">
                   I love this app! It provides&nbsp;
                   <b>concise and accurate summaries</b> of books in a way that
-                  is easy to understand. It's also very user-friendly and
+                  is easy to understand. It&apos;s also very user-friendly and
                   intuitive.
                 </div>
               </div>
@@ -227,10 +227,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  If you're a busy person who
-                  <b>loves reading but doesn't have the time</b> to read every
+                  If you&apos;re a busy person who
+                  <b>loves reading but doesn&apos;t have the time</b> to read every
                   book in full, this app is for you! The summaries are thorough
-                  and provide a great overview of the book's content.
+                  and provide a great overview of the book&apos;s content.
                 </div>
               </div>
             </div>

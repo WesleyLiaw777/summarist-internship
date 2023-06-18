@@ -133,7 +133,7 @@ export default function AuthModal() {
               onClick={() => handleSectionChange("signup")}
               className="hover__duration h-10 rounded-lg bg-[#f1f6f4] text-sm text-[#116be9] hover:bg-[#e1e9e8]"
             >
-              Don't have an account?
+              Don&apos;t have an account?
             </button>
           </div>
         )}
