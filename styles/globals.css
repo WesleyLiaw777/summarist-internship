@@ -8,6 +8,7 @@
   display: flex;
   justify-content: space-between;
   width: calc((100% / 3) * 2);
+  max-width: 1200px;
   background-color: #fbefd6;
   border-radius: 4px;
   padding: 24px;
@@ -19,7 +20,7 @@
   font-size: 22px;
   font-weight: 700;
   color: #032b41;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .foryou__section--subtitle {
