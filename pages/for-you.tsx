@@ -121,38 +121,36 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-[calc(100vh - 200px)] flex h-screen flex-1 flex-col items-center md:ml-[200px] ">
+        <div className="flex h-screen flex-1 flex-col items-center md:ml-[200px] 2xl:ml-0 ">
           {/* TOP SECTION */}
-          <div className="h-[80px]">
-            <div className="margin-auto flex w-full max-w-[1070px] flex-col">
-              <div className="justify flex h-[80px] items-center justify-end ">
-                {/* SEARCH BAR */}
-                <div className="relative m-8 flex w-full max-w-[340px] bg-[#f1f6f4]">
-                  <input
-                    className="h-[40px] w-full rounded-md border-2 bg-[#f1f6f4] p-3 text-sm text-[#042330] placeholder-gray-500 outline-none"
-                    type="text"
-                    placeholder="Search for books..."
-                  />
-                  <div className="absolute right-[4px] flex h-[40px] items-center border-l-2 border-[#e1e7ea]">
-                    <div className="pl-2 pr-1">
-                      <AiOutlineSearch className="text-2xl" />
-                    </div>
+          <div className="flex h-[80px] w-full max-w-[1070px] justify-end">
+            <div className="flex flex:1 margin-auto flex-col justify-center">
+              {/* SEARCH BAR */}
+              <div className="relative m-8 flex w-full max-w-[340px] bg-[#f1f6f4]">
+                <input
+                  className="h-[40px] w-full rounded-md border-2 bg-[#f1f6f4] p-3 text-sm text-[#042330] placeholder-gray-500 outline-none"
+                  type="text"
+                  placeholder="Search for books..."
+                />
+                <div className="absolute right-[4px] flex h-[40px] items-center border-l-2 border-[#e1e7ea]">
+                  <div className="pl-2 pr-1">
+                    <AiOutlineSearch className="text-2xl" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <hr />
+          <hr className="w-screen" />
 
           {/* CONTENT SECTION */}
-          <div className="mt-10 flex flex-col gap-y-3 p-6">
+          <div className="mt-10 flex flex-col gap-y-3 p-6 pb-[80px] max-w-[1070px]">
             {/* SELECTED BOOK */}
-            <section>
+            <section className="mx-4 w-full flex flex-col">
               <h3 className="foryou__section--title">Selected just for you</h3>
               <Link
                 href={"/book"}
-                className="mb-6 flex w-full max-w-[680px] flex-col justify-between gap-6 rounded bg-[#fbefd6] text-[#032b41] md:flex-row p-6 md:px-10 md:py-6"
+                className="mb-6 flex w-full max-w-[680px] flex-col justify-between gap-6 rounded bg-[#fbefd6] p-6 text-[#032b41] md:flex-row md:px-10 md:py-6"
               >
                 <div className="w-full text-left md:w-[30%]">
                   {selected?.subTitle}
