@@ -1,21 +1,24 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import { AiFillFileText, AiFillBulb, AiFillAudio } from "react-icons/ai";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import { BiCrown } from "react-icons/bi";
 import { RiLeafLine } from "react-icons/ri";
-const inter = Inter({ subsets: ["latin"] });
-
+import { useRecoilState } from "recoil";
+import { authModalOpenAtom } from "@/atoms/authModalAtom";
 export default function Home() {
+  const [showAuthModal, setShowAuthModal] = useRecoilState(authModalOpenAtom);
+  const handleOpen = () => {
+    setShowAuthModal(true);
+  }
   return (
-    <body>
+    <>
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
             <Image src="/logo.png" width={200} height={200} alt="logo" />
           </figure>
           <ul className="nav__list--wrapper">
-            <li className="nav__list nav__list--login">Login</li>
+            <li className="nav__list nav__list--login" onClick={handleOpen}>Login</li>
             <li className="nav__list nav__list--mobile">About</li>
             <li className="nav__list nav__list--mobile">Contact</li>
             <li className="nav__list nav__list--mobile">Help</li>
@@ -38,10 +41,17 @@ export default function Home() {
                   <br className="remove--tablet" />
                   and even people who don’t like to read.
                 </div>
-                <button className="btn home__cta--btn">Login</button>
+                <button className="btn home__cta--btn" onClick={handleOpen}>
+                  Login
+                </button>
               </div>
               <figure className="landing__image--mask">
-                <Image src="/landing.png" width={400} height={100} alt="landing"/>
+                <Image
+                  src="/landing.png"
+                  width={400}
+                  height={100}
+                  alt="landing"
+                />
               </figure>
             </div>
           </div>
@@ -176,7 +186,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  This app has been a <b>game-changer</b> for me! It's saved me
+                  This app has been a <b>game changer</b> for me! It's saved me
                   so much time and effort in reading and comprehending books.
                   Highly recommend it to all book lovers.
                 </div>
@@ -189,7 +199,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="review__body">
-                  I love this app! It provides
+                  I love this app! It provides&nbsp;
                   <b>concise and accurate summaries</b> of books in a way that
                   is easy to understand. It's also very user-friendly and
                   intuitive.
@@ -225,7 +235,9 @@ export default function Home() {
               </div>
             </div>
             <div className="reviews__btn--wrapper">
-              <button className="btn home__cta--btn">Login</button>
+              <button className="btn home__cta--btn" onClick={handleOpen}>
+                Login
+              </button>
             </div>
           </div>
         </div>
@@ -234,7 +246,7 @@ export default function Home() {
         <div className="container">
           <div className="row">
             <div className="section__title">
-              Start growing with Summarist now
+              Start growing with Summarist now!
             </div>
             <div className="numbers__wrapper">
               <div className="numbers">
@@ -350,6 +362,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </body>
+    </>
   );
 }
