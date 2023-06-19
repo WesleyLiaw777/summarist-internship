@@ -66,7 +66,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
       {/* PAGE */}
       <div className="flex">
         {/* SIDEBAR */}
-        <div className="fixed hidden h-screen w-[200px] flex-col bg-[#f7faf9] md:flex">
+        <div className="fixed h-screen w-[200px] flex-col bg-[#f7faf9] left-[-200px] md:left-0 transition ease duration-300 md:flex">
           <Image
             src="/logo.png"
             width={300}
@@ -120,7 +120,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex flex-1 w-full md:w-[calc(100vw-200px)] justify-center px-8 md:ml-[200px] 2xl:ml-0">
+        <div className="flex w-full flex-1 justify-center pl-6 pr-10 translate-x-0 md:translate-x-[224px] md:w-[calc(100vw-224px)] 2xl:ml-0 md:transition-transform md:duration-300">
           {/* RIGHT PAGE */}
           <div className="flex w-full max-w-[1070px] flex-col items-center">
             {/* TOP */}
@@ -136,7 +136,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
                 </div>
               </div>
             </div>
-            <hr className="w-screen"/>
+            <hr className="w-screen" />
             {/* CONTENT SECTION */}
             <div className="mt-10 flex w-full max-w-[1070px] flex-col gap-y-3 pb-[80px]">
               {/* SELECTED BOOK */}
@@ -145,7 +145,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
                   Selected just for you
                 </h3>
                 <Link
-                  href={"/book"}
+                  href={`/book/${selected.id}`}
                   className="mb-6 flex w-full max-w-[680px] flex-col justify-between gap-6 rounded bg-[#fbefd6] p-6 text-[#032b41] md:flex-row md:px-10 md:py-6"
                 >
                   <div className="w-full text-left md:w-[30%]">
