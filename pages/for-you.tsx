@@ -66,7 +66,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
       {/* PAGE */}
       <div className="flex">
         {/* SIDEBAR */}
-        <div className="fixed h-screen w-[200px] flex-col bg-[#f7faf9] left-[-200px] md:left-0 transition ease duration-300 md:flex">
+        <div className="fixed h-screen w-[200px] flex-col bg-[#f7faf9] translate-x-[-200px] md:translate-x-0 transition ease duration-300 md:flex">
           <Image
             src="/logo.png"
             width={300}
@@ -120,7 +120,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex w-full flex-1 justify-center pl-6 pr-10 translate-x-0 md:translate-x-[224px] md:w-[calc(100vw-224px)] 2xl:ml-0 md:transition-transform md:duration-300">
+        <div className="flex w-full flex-1 justify-center pl-6 pr-10 translate-x-0 md:translate-x-[200px] md:mr-[200px] md:w-[calc(100vw-200px)] 2xl:ml-0 transition ease duration-300">
           {/* RIGHT PAGE */}
           <div className="flex w-full max-w-[1070px] flex-col items-center">
             {/* TOP */}
