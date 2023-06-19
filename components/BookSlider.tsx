@@ -20,7 +20,6 @@ export default function BookSlider({ books }: BookSliderProps) {
             height={172}
             alt="book image"
           />
-          <span>xd123</span>
         </Link>
       ))}
     </div>
