@@ -120,7 +120,7 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex flex-1 justify-center px-8 md:ml-[200px] 2xl:ml-0">
+        <div className="flex flex-1 w-full md:w-[calc(100vw-200px)] justify-center px-8 md:ml-[200px] 2xl:ml-0">
           {/* RIGHT PAGE */}
           <div className="flex w-full max-w-[1070px] flex-col items-center">
             {/* TOP */}
@@ -136,8 +136,9 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
                 </div>
               </div>
             </div>
+            <hr className="w-screen"/>
             {/* CONTENT SECTION */}
-            <div className="mt-10 flex max-w-[1070px] flex-col gap-y-3 pb-[80px]">
+            <div className="mt-10 flex w-full max-w-[1070px] flex-col gap-y-3 pb-[80px]">
               {/* SELECTED BOOK */}
               <section>
                 <h3 className="foryou__section--title">
@@ -175,6 +176,15 @@ export default function ForYou({ selected, recommended, suggested }: Props) {
                   We think you&apos;ll like these
                 </span>
                 <BookSlider books={recommended} />
+              </section>
+
+              {/* SUGGESTED */}
+              <section>
+                <h3 className="foryou__section--title">Suggested Books</h3>
+                <span className="foryou__section--subtitle">
+                  Browse these books
+                </span>
+                <BookSlider books={suggested} />
               </section>
             </div>
           </div>
