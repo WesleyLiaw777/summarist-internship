@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Modal } from "@mui/material";
 import { useRecoilState } from "recoil";
@@ -10,14 +10,18 @@ import { FcGoogle } from "react-icons/fc";
 
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useRouter } from "next/router";
+import { authAtom } from "@/atoms/authAtom";
+import { User } from "@/typings";
 
 export default function AuthModal() {
   /* MODAL */
   const [authModalOpen, setAuthModalOpen] = useRecoilState(authModalOpenAtom);
+  const [user, setUser] = useRecoilState(authAtom);
   //used one state to handle switching b/w login/password/signup content
   const [activeSection, setActiveSection] = useState<string>("login");
   const handleSectionChange = (section: string) => {
@@ -39,33 +43,38 @@ export default function AuthModal() {
   //One auth function to handle them all (guest login, login, signup)
   const handleAuth = async (authOption: string) => {
     try {
-      let userCredential;
       if (authOption === "guest") {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          "guest@guestmail.com",
-          "123456"
-        );
+        await signInWithEmailAndPassword(auth, "guest@guestmail.com", "123456");
       } else if (authOption === "signin") {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await signInWithEmailAndPassword(auth, email, password);
       } else if (authOption === "signup") {
-        userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        await createUserWithEmailAndPassword(auth, email, password);
       }
-      router.push("/for-you");
-      handleClose();
     } catch (error: any) {
       console.error(error.message);
       setErrorMsg(error.message);
     }
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          email: user.email ?? "",
+          uid: user.uid,
+        });
+        router.push("/for-you");
+        handleClose();
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // Clean up the listener when the component unmounts
+      unsubscribe();
+    };
+  }, [auth]);
 
   return (
     <Modal

@@ -12,8 +12,17 @@ import { BiMicrophone } from "react-icons/bi";
 import { BsBook, BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import { VscBook } from "react-icons/vsc";
+import { useRecoilState } from "recoil";
+import { authAtom } from "@/atoms/authAtom";
+import { authModalOpenAtom } from "@/atoms/authModalAtom";
 
 export default function Book() {
+  const [user, setUser] = useRecoilState(authAtom);
+  const [showAuthModal, setShowAuthModal] = useRecoilState(authModalOpenAtom);
+  const handleOpen = () => {
+    setShowAuthModal(true);
+  };
+
   const router = useRouter();
   const { id } = router.query;
   const [book, setBook] = useState<Book | undefined>();
@@ -29,6 +38,15 @@ export default function Book() {
   useEffect(() => {
     id && getBook();
   }, [id]);
+
+  const handleReadOrListen = () => {
+    if (!user) {
+      handleOpen();
+    }
+    else {
+      // if (subscriptionStatus )
+    }
+  }
 
   //if in library, show filled bookmark
   const addToLibrary = () => {};
@@ -77,10 +95,10 @@ export default function Book() {
               </div>
             </div>
             <div className="mb-6 flex justify-start gap-x-4">
-              <button className="book__button">
+              <button className="book__button" onClick={handleReadOrListen}>
                 <VscBook className="text-2xl" /> Read
               </button>
-              <button className="book__button">
+              <button className="book__button" onClick={handleReadOrListen}>
                 <BiMicrophone className="text-2xl" /> Listen
               </button>
             </div>

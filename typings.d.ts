@@ -16,3 +16,8 @@ export interface Book {
   bookDescription: string;
   authorDescription: string;
 }
+
+interface User {
+  email: string;
+  uid: string;
+}

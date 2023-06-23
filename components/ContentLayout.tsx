@@ -13,18 +13,24 @@ import { BsBookmarks } from "react-icons/bs";
 import { BsPen } from "react-icons/bs";
 import { FiLogOut } from "react-icons/fi";
 import { GoGear } from "react-icons/go";
+import { authAtom } from "@/atoms/authAtom";
+import { useRecoilState } from "recoil";
+import { authModalOpenAtom } from "@/atoms/authModalAtom";
 
 export default function ContentLayout({ children }: any) {
-  const [LoginOrLogout, setLoginOrLogout] = useState("Logout");
-
-  const handleLoginOrLogout = () => {
-    //handle authentication
-    setLoginOrLogout(LoginOrLogout === "Logout" ? "Login" : "Logout");
+  const [user, setUser] = useRecoilState(authAtom);
+  const [showAuthModal, setShowAuthModal] = useRecoilState(authModalOpenAtom);
+  const handleOpen = () => {
+    setShowAuthModal(true);
   };
+  const handleLogout = () => {
+    signOut(auth);
+  };
+  console.log(user);
 
   let currentPath;
   let currentPage;
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     currentPath = window.location.pathname;
     currentPage = currentPath.substring(currentPath.lastIndexOf("/") + 1);
   }
@@ -88,13 +94,24 @@ export default function ContentLayout({ children }: any) {
                 <AiOutlineQuestionCircle className="mr-3 text-2xl" />
                 <span>Help & Support</span>
               </li>
-              <li
-                onClick={handleLoginOrLogout}
-                className="sidebar__link cursor-pointer"
-              >
-                <FiLogOut className="mr-3 text-2xl" />
-                <span>{LoginOrLogout}</span>
-              </li>
+              {user ? (
+                <li
+                  onClick={handleLogout}
+                  className="sidebar__link cursor-pointer"
+                >
+                  <FiLogOut className="mr-3 text-2xl" />
+                  <span>Logout</span>
+                </li>
+              ) : (
+                <li
+                  // OPEN MODAL
+                  onClick={handleOpen}
+                  className="sidebar__link cursor-pointer"
+                >
+                  <FiLogOut className="mr-3 text-2xl" />
+                  <span>Login</span>
+                </li>
+              )}
             </ul>
           </div>
         </div>
