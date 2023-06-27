@@ -1,4 +1,5 @@
 const BASE_API_URL = `https://us-central1-summaristt.cloudfunctions.net`;
+
 let requests: any[] = [
   `${BASE_API_URL}/getBooks?status=selected`,
   `${BASE_API_URL}/getBooks?status=recommended`,

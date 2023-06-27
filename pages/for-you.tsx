@@ -6,27 +6,40 @@ import { Book } from "@/typings";
 import requests from "@/requests";
 import BookSlider from "@/components/BookSlider";
 import ContentLayout from "@/components/ContentLayout";
+import { Product, getProducts } from "@stripe/firestore-stripe-payments";
+import payments from "@/lib/stripe";
 
 interface Props {
   selected: Book;
   recommended: Book[];
   suggested: Book[];
+  products: Product[];
 }
 
 export const getServerSideProps = async () => {
   try {
+    //our subscriptions
+    const products = await getProducts(payments, {
+      includePrices: true,
+      activeOnly: true,
+    })
+    .then((res) => res)
+    .catch((error) => console.log(error.message));
+
+    //our books
     //concurrently fetch for improved performance
     let [selected, recommended, suggested] = await axios
       .all(requests.map((url) => axios.get(url)))
       .then((results) => results.map((response) => response.data));
 
-    //selected is returned as an array with only 1 object. simplified.
+    //selected is returned as an array with only 1 object. my best idea.
     selected = selected[0];
     return {
       props: {
         selected,
         recommended,
         suggested,
+        products,
       },
     };
   } catch (error) {
@@ -36,12 +49,14 @@ export const getServerSideProps = async () => {
         selected: null,
         recommended: [],
         suggested: [],
+        products: [],
       },
     };
   }
 };
 
-export default function ForYou({ selected, recommended, suggested }: Props) {
+export default function ForYou({ selected, recommended, suggested, products }: Props) {
+  console.log("🚀 ~ file: for-you.tsx:59 ~ ForYou ~ products:", products)
   return (
     <ContentLayout>
       {/* CONTENT SECTION */}
