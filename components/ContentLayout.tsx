@@ -26,7 +26,6 @@ export default function ContentLayout({ children }: any) {
   const handleLogout = () => {
     signOut(auth);
   };
-  console.log(user);
 
   let currentPath;
   let currentPage;

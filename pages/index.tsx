@@ -6,6 +6,7 @@ import { RiLeafLine } from "react-icons/ri";
 import { useRecoilState } from "recoil";
 import { authModalOpenAtom } from "@/atoms/authModalAtom";
 export default function Home() {
+
   const [showAuthModal, setShowAuthModal] = useRecoilState(authModalOpenAtom);
   const handleOpen = () => {
     setShowAuthModal(true);

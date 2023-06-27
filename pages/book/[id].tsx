@@ -39,6 +39,11 @@ export default function Book() {
     id && getBook();
   }, [id]);
 
+  //!must finish before running
+  //? I need help with this
+  //todo: this is not done yet
+  // Just kidding, this is all test comments
+  // *
   const handleReadOrListen = () => {
     if (!user) {
       handleOpen();
@@ -109,7 +114,7 @@ export default function Book() {
               </div>
             </div>
             <div>
-              <div className="book__description--header">What's it about?</div>
+              <div className="book__description--header">What&apos;s it about?</div>
               <div className="mb-4 flex gap-x-6">
                 <div className="book__description--tag">{book?.tags[0]}</div>
                 <div className="book__description--tag">{book?.tags[1]}</div>
